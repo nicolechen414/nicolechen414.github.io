@@ -12,6 +12,9 @@ I'm Mengyuan Chen and currently pursuing a Master of Science in Biostatistics at
 
 # More about me
 This is my cat, Heimi:
+
+<img src="images/IMG_0176.jpeg" style="width:75%">
+
 ![](image/IMG_0176.jpeg)
 
 # Personal Accounts
