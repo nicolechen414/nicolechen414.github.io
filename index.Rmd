@@ -24,3 +24,4 @@ This is my cat, Heimi:
 
 # Link to page within the site
 [Resume](resume.html)
+[Problem 2](problem2.html)
