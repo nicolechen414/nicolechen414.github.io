@@ -62,6 +62,7 @@ scatter_plot <- data_ny %>%
   layout(title = "Scatter Plot of Minimum vs Maximum Temperature",
          xaxis = list(title = "Minimum Temperature (°C)"),
          yaxis = list(title = "Maximum Temperature (°C)"))
+scatter_plot
 ```
 ```{r}
 # Line Plot
@@ -75,6 +76,7 @@ line_plot <- monthly_avg %>%
   layout(title = "Monthly Average Temperature Over Years",
          xaxis = list(title = "Year"),
          yaxis = list(title = "Average Temperature (°C)"))
+line_plot
 
 ```
 
@@ -86,7 +88,7 @@ box_plot <- data_ny %>%
   layout(title = "Monthly Precipitation Distribution",
          xaxis = list(title = "Month"),
          yaxis = list(title = "Precipitation (mm)"))
-
+box_plot
 ```
 
 
