@@ -87,10 +87,13 @@ line_plot
 
 ```{r}
 # Box Plot:
+set.seed(123)
 box_plot <- data_ny %>%
+  filter(!is.na(prcp)) %>%
+  sample_n(5000) %>%  
   plot_ly(x = ~month, y = ~prcp, type = "box",
           boxpoints = "all", jitter = 0.3, pointpos = -1.8) %>%
-  layout(title = "Monthly Precipitation Distribution",
+  layout(title = "Monthly Precipitation Distribution (Sampled)",
          xaxis = list(title = "Month"),
          yaxis = list(title = "Precipitation (mm)"))
 box_plot
