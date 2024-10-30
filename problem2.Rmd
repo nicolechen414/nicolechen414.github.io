@@ -1,8 +1,12 @@
 ---
 title: "Problem 2"
-output: github_document
-date: "2024-10-28"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
 ---
+
+## Solution for Problem 2
 
 ```{r setup, include=FALSE}
 # import necessary libraries
