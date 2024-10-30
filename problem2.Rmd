@@ -56,7 +56,7 @@ data_ny = ny_noaa %>%
 ```{r}
 # Scatter Plot
 scatter_plot <- data_ny %>%
-  sample_n(1000) %>%  # Sample for visualization
+  sample_n(1000) %>%  
   plot_ly(x = ~tmin, y = ~tmax, type = "scatter", mode = "markers",
           marker = list(color = 'rgba(0, 150, 200, .5)')) %>%
   layout(title = "Scatter Plot of Minimum vs Maximum Temperature",
@@ -65,14 +65,14 @@ scatter_plot <- data_ny %>%
 ```
 ```{r}
 # Line Plot
-monthly_avg_temp <- data_ny %>%
+monthly_avg<- data_ny %>%
   group_by(year, month) %>%
   summarize(avg_temp = mean((tmax + tmin) / 2, na.rm = TRUE))
 
-line_plot <- monthly_avg_temp %>%
+line_plot <- monthly_avg %>%
   plot_ly(x = ~year, y = ~avg_temp, type = "scatter", mode = "lines",
           line = list(color = 'rgba(255, 100, 100, .8)')) %>%
-  layout(title = "Average Monthly Temperature Over Years",
+  layout(title = "Monthly Average Temperature Over Years",
          xaxis = list(title = "Year"),
          yaxis = list(title = "Average Temperature (°C)"))
 
