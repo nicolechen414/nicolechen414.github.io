@@ -6,6 +6,6 @@ output:
     toc_float: true
 ---
 
-# This page has information about me
+## This page has information about me
 
 ![](Mengyuan_Chen-CV2024.pdf)
