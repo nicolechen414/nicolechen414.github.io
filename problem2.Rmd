@@ -1,0 +1,92 @@
+---
+title: "Problem 2"
+output: github_document
+date: "2024-10-28"
+---
+
+```{r setup, include=FALSE}
+# import necessary libraries
+library(tidyverse)
+library(ggridges)
+library(patchwork)
+library(knitr)
+library(plotly)
+library(p8105.datasets)
+
+knitr::opts_chunk$set(
+	echo = TRUE,
+	warning = FALSE,
+	fig.width = 8, 
+  fig.height = 6,
+  out.width = "90%"
+)
+
+theme_set(theme_minimal() + theme(legend.position = "bottom"))
+
+options(
+  ggplot2.continuous.colour = "viridis",
+  ggplot2.continuous.fill = "viridis"
+)
+
+scale_colour_discrete = scale_colour_viridis_d
+scale_fill_discrete = scale_fill_viridis_d
+```
+
+#Problem 2
+```{r}
+# read dataset
+data("ny_noaa")
+```
+
+```{r}
+#clean the dataset
+data_ny = ny_noaa %>%
+  janitor::clean_names() |>
+  drop_na(tmin,tmax,date)|>
+  separate(date, into = c("year", "month", "day"), convert = TRUE)|>
+  mutate(
+    tmax = as.numeric(tmax) / 10,   
+    tmin = as.numeric(tmin) / 10,
+    prcp = prcp / 10,               
+    snow = as.numeric(snow)        
+  ) 
+
+```
+
+```{r}
+# Scatter Plot
+scatter_plot <- data_ny %>%
+  sample_n(1000) %>%  # Sample for visualization
+  plot_ly(x = ~tmin, y = ~tmax, type = "scatter", mode = "markers",
+          marker = list(color = 'rgba(0, 150, 200, .5)')) %>%
+  layout(title = "Scatter Plot of Minimum vs Maximum Temperature",
+         xaxis = list(title = "Minimum Temperature (°C)"),
+         yaxis = list(title = "Maximum Temperature (°C)"))
+```
+```{r}
+# Line Plot
+monthly_avg_temp <- data_ny %>%
+  group_by(year, month) %>%
+  summarize(avg_temp = mean((tmax + tmin) / 2, na.rm = TRUE))
+
+line_plot <- monthly_avg_temp %>%
+  plot_ly(x = ~year, y = ~avg_temp, type = "scatter", mode = "lines",
+          line = list(color = 'rgba(255, 100, 100, .8)')) %>%
+  layout(title = "Average Monthly Temperature Over Years",
+         xaxis = list(title = "Year"),
+         yaxis = list(title = "Average Temperature (°C)"))
+
+```
+
+```{r}
+# Box Plot:
+box_plot <- data_ny %>%
+  plot_ly(x = ~month, y = ~prcp, type = "box",
+          boxpoints = "all", jitter = 0.3, pointpos = -1.8) %>%
+  layout(title = "Monthly Precipitation Distribution",
+         xaxis = list(title = "Month"),
+         yaxis = list(title = "Precipitation (mm)"))
+
+```
+
+
